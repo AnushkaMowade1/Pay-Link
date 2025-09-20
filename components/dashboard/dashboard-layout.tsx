@@ -4,8 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Wallet, Send, Download, History, QrCode, Zap, LogOut, Menu, X, Home, Users } from "lucide-react"
-import { useAuth } from "@/hooks/use-auth"
+import { Wallet, Send, Download, History, QrCode, Zap, Menu, X, Home, Users } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface DashboardLayoutProps {
@@ -15,7 +14,6 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children, activeTab, onTabChange }: DashboardLayoutProps) {
-  const { user, logout } = useAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const router = useRouter()
 
@@ -55,11 +53,6 @@ export function DashboardLayout({ children, activeTab, onTabChange }: DashboardL
               <Button variant="ghost" size="sm" onClick={handleHomeClick}>
                 <Home className="w-4 h-4 mr-2" />
                 Home
-              </Button>
-              <div className="hidden sm:block text-sm text-muted-foreground">Welcome, {user?.name}</div>
-              <Button variant="ghost" size="sm" onClick={logout}>
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
               </Button>
             </div>
           </div>

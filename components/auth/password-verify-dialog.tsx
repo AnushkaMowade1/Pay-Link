@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import {
   Dialog,
@@ -9,93 +7,93 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Eye, EyeOff, Lock, AlertCircle, Loader2 } from "lucide-react"
+import { Eye, EyeOff, Lock, AlertCircle } from "lucide-react"
 import { usePassword } from "@/hooks/use-password"
 
 interface PasswordVerifyDialogProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  onVerified: () => void
+  children: React.ReactNode
+  onSuccess?: () => void
   title?: string
   description?: string
 }
 
 export function PasswordVerifyDialog({ 
-  open, 
-  onOpenChange, 
-  onVerified, 
+  children, 
+  onSuccess, 
   title = "Verify Password",
-  description = "Please enter your password to authorize this transaction"
+  description = "Enter your password to authorize this transaction"
 }: PasswordVerifyDialogProps) {
   const { verifyPassword } = usePassword()
-  const [password, setPassword] = useState("")
+  const [open, setOpen] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
-  const handleVerify = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
+    setError("")
     setIsLoading(true)
-
+    
     try {
       const isValid = await verifyPassword(password)
+      
       if (isValid) {
-        onVerified()
-        onOpenChange(false)
+        setOpen(false)
         setPassword("")
+        onSuccess?.()
       } else {
-        setError("Incorrect password")
+        setError("Incorrect password. Please try again.")
       }
-    } catch (error: any) {
-      setError(error.message || "Password verification failed")
+    } catch (error) {
+      setError("Failed to verify password. Please try again.")
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleCancel = () => {
-    setPassword("")
-    setError(null)
-    onOpenChange(false)
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen)
+    if (!newOpen) {
+      setPassword("")
+      setError("")
+    }
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>
+        {children}
+      </DialogTrigger>
+      <DialogContent>
         <DialogHeader>
-          <div className="flex items-center space-x-3 mb-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-              <Lock className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <DialogTitle className="text-xl">{title}</DialogTitle>
-              <DialogDescription>
-                {description}
-              </DialogDescription>
-            </div>
-          </div>
+          <DialogTitle className="flex items-center gap-2">
+            <Lock className="w-5 h-5" />
+            {title}
+          </DialogTitle>
+          <DialogDescription>
+            {description}
+          </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleVerify} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="verify-password">Password</Label>
+            <Label htmlFor="password">Password</Label>
             <div className="relative">
               <Input
-                id="verify-password"
+                id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value)
-                  setError(null) // Clear error when user starts typing
+                  setError("")
                 }}
                 placeholder="Enter your password"
-                className="pr-10"
                 required
                 autoFocus
               />
@@ -106,47 +104,32 @@ export function PasswordVerifyDialog({
                 className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
               </Button>
             </div>
+            {error && (
+              <div className="flex items-center gap-2 text-sm text-red-500">
+                <AlertCircle className="w-4 h-4" />
+                {error}
+              </div>
+            )}
           </div>
 
-          {error && (
-            <Alert variant="destructive">
-              <AlertCircle className="w-4 h-4" />
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-            <p className="text-sm text-blue-700">
-              🔒 Your password authorizes this transaction and ensures only you can make payments from your wallet.
-            </p>
-          </div>
-
-          <div className="flex space-x-3">
+          <div className="flex gap-2 pt-4">
             <Button
               type="button"
               variant="outline"
-              onClick={handleCancel}
+              onClick={() => handleOpenChange(false)}
               className="flex-1"
-              disabled={isLoading}
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              className="flex-1 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
-              disabled={isLoading || !password}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Verifying...
-                </>
-              ) : (
-                "Verify & Continue"
-              )}
+            <Button type="submit" disabled={isLoading || !password} className="flex-1">
+              {isLoading ? "Verifying..." : "Authorize"}
             </Button>
           </div>
         </form>
