@@ -1,4 +1,4 @@
-// Mock Reward system for PayFi Demo
+// Mock Reward system for PayLink Demo
 // In production, this would integrate with deployed smart contracts
 
 // Reward calculation: 10 RWD per 1 SHM sent
@@ -8,8 +8,8 @@ export const REWARD_RATE = 10
 export const CONVERSION_RATE = 100
 
 // Local storage keys for mock rewards system
-const REWARDS_STORAGE_KEY = "payfi_rewards_"
-const REWARDS_HISTORY_KEY = "payfi_rewards_history_"
+const REWARDS_STORAGE_KEY = "PayLink_rewards_"
+const REWARDS_HISTORY_KEY = "PayLink_rewards_history_"
 
 interface RewardTransaction {
   id: string

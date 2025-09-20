@@ -27,7 +27,7 @@ export function usePassword() {
 
     try {
       // Check if password hash exists in localStorage for this wallet address
-      const passwordHash = localStorage.getItem(`payfi_password_${address.toLowerCase()}`)
+      const passwordHash = localStorage.getItem(`PayLink_password_${address.toLowerCase()}`)
       setPasswordState({
         isPasswordSet: !!passwordHash,
         isLoading: false,
@@ -76,7 +76,7 @@ export function usePassword() {
         timestamp: Date.now(),
       }
 
-      localStorage.setItem(`payfi_password_${address.toLowerCase()}`, JSON.stringify(passwordData))
+      localStorage.setItem(`PayLink_password_${address.toLowerCase()}`, JSON.stringify(passwordData))
       
       setPasswordState({ isPasswordSet: true, isLoading: false })
       return true
@@ -92,7 +92,7 @@ export function usePassword() {
     }
 
     try {
-      const storedData = localStorage.getItem(`payfi_password_${address.toLowerCase()}`)
+      const storedData = localStorage.getItem(`PayLink_password_${address.toLowerCase()}`)
       if (!storedData) {
         throw new Error("No password set for this wallet")
       }
@@ -141,7 +141,7 @@ export function usePassword() {
         throw new Error("Password is incorrect")
       }
 
-      localStorage.removeItem(`payfi_password_${address.toLowerCase()}`)
+      localStorage.removeItem(`PayLink_password_${address.toLowerCase()}`)
       setPasswordState({ isPasswordSet: false, isLoading: false })
       return true
     } catch (error) {

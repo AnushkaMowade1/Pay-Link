@@ -1,4 +1,4 @@
-# PayFi - Web3 Payment Platform
+# PayLink - Web3 Payment Platform
 
 A modern, secure Web3 payment platform built with Next.js, featuring peer-to-peer transactions, split bill functionality, and a comprehensive rewards system.
 
@@ -95,7 +95,7 @@ A modern, secure Web3 payment platform built with Next.js, featuring peer-to-pee
 ## 🏗️ Project Structure
 
 ```
-PayFi/
+PayLink/
 ├── app/                    # Next.js 13+ app directory
 │   ├── dashboard/         # Dashboard pages
 │   ├── learn-more/        # Information pages
@@ -199,8 +199,8 @@ For support, email your-email@example.com or join our Discord community.
 
 ## 🌐 Live Demo
 
-Visit the live application: [PayFi Demo](http://localhost:3000) (when running locally)
+Visit the live application: [PayLink Demo](http://localhost:3000) (when running locally)
 
 ---
 
-**Made with ❤️ by the PayFi Team**
+**Made with ❤️ by the PayLink Team**

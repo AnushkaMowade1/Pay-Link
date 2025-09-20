@@ -86,8 +86,8 @@ export function AuthDialog({ children }: AuthDialogProps) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Welcome to PayFi</DialogTitle>
-          <DialogDescription>Sign in to your account or create a new one to start using PayFi</DialogDescription>
+          <DialogTitle>Welcome to PayLink</DialogTitle>
+          <DialogDescription>Sign in to your account or create a new one to start using PayLink</DialogDescription>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
@@ -100,7 +100,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
             <Card className="border-0 shadow-none">
               <CardHeader className="px-0">
                 <CardTitle className="text-xl">Sign In</CardTitle>
-                <CardDescription>Enter your credentials to access your PayFi account</CardDescription>
+                <CardDescription>Enter your credentials to access your PayLink account</CardDescription>
               </CardHeader>
               <CardContent className="px-0">
                 <form onSubmit={handleLogin} className="space-y-4">
@@ -161,7 +161,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
             <Card className="border-0 shadow-none">
               <CardHeader className="px-0">
                 <CardTitle className="text-xl">Create Account</CardTitle>
-                <CardDescription>Join PayFi and start making fast, low-cost payments</CardDescription>
+                <CardDescription>Join PayLink and start making fast, low-cost payments</CardDescription>
               </CardHeader>
               <CardContent className="px-0">
                 <form onSubmit={handleSignup} className="space-y-4">

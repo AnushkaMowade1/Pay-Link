@@ -1,4 +1,4 @@
-// Split Bill utility functions for PayFi
+// Split Bill utility functions for PayLink
 
 export interface SplitBillParticipant {
   id: string
@@ -23,7 +23,7 @@ export interface SplitBill {
 }
 
 // Local storage keys
-const SPLIT_BILLS_STORAGE_KEY = "payfi_split_bills_"
+const SPLIT_BILLS_STORAGE_KEY = "PayLink_split_bills_"
 
 /**
  * Calculate equal split amounts for participants

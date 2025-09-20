@@ -21,7 +21,7 @@ export default function LearnMorePage() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    PayFi
+                    PayLink
                   </h1>
                   <span className="text-xs bg-gradient-to-r from-primary/20 to-secondary/20 text-primary px-3 py-1 rounded-full border border-primary/20 font-medium">
                     Shardeum
@@ -40,7 +40,7 @@ export default function LearnMorePage() {
             <div className="flex items-center justify-center mb-6">
               <Info className="w-8 h-8 text-primary mr-3" />
               <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                How PayFi Works
+                How PayLink Works
               </span>
             </div>
             
@@ -52,21 +52,21 @@ export default function LearnMorePage() {
             </h2>
             
             <p className="text-xl md:text-2xl text-muted-foreground text-balance mb-12 leading-relaxed">
-              Discover how PayFi revolutionizes digital payments on Shardeum's lightning-fast blockchain network
+              Discover how PayLink revolutionizes digital payments on Shardeum's lightning-fast blockchain network
             </p>
           </div>
         </div>
       </section>
 
-      {/* What is PayFi Section */}
+      {/* What is PayLink Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-muted/30 to-muted/10">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <Card className="mb-12 border-primary/20 shadow-xl">
               <CardHeader className="text-center">
-                <CardTitle className="text-3xl font-bold mb-4">What is PayFi?</CardTitle>
+                <CardTitle className="text-3xl font-bold mb-4">What is PayLink?</CardTitle>
                 <CardDescription className="text-lg">
-                  PayFi is a next-generation decentralized payment platform built on Shardeum blockchain
+                  PayLink is a next-generation decentralized payment platform built on Shardeum blockchain
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -124,9 +124,9 @@ export default function LearnMorePage() {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-4xl md:text-5xl font-bold mb-4">How PayFi Works</h3>
+            <h3 className="text-4xl md:text-5xl font-bold mb-4">How PayLink Works</h3>
             <p className="text-muted-foreground text-xl max-w-2xl mx-auto">
-              Simple steps to start using PayFi for your digital payments
+              Simple steps to start using PayLink for your digital payments
             </p>
           </div>
 
@@ -135,7 +135,7 @@ export default function LearnMorePage() {
               {
                 step: "01",
                 title: "Connect Wallet",
-                description: "Connect your MetaMask or compatible Web3 wallet to PayFi",
+                description: "Connect your MetaMask or compatible Web3 wallet to PayLink",
                 icon: <Shield className="w-8 h-8" />,
                 color: "from-blue-500 to-blue-600"
               },
@@ -149,7 +149,7 @@ export default function LearnMorePage() {
               {
                 step: "03",
                 title: "Add Funds",
-                description: "Deposit SHM tokens to your PayFi wallet for transactions",
+                description: "Deposit SHM tokens to your PayLink wallet for transactions",
                 icon: <CreditCard className="w-8 h-8" />,
                 color: "from-purple-500 to-purple-600"
               },
@@ -259,7 +259,7 @@ export default function LearnMorePage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base leading-relaxed">
-                    No central authority controls your funds. PayFi operates as a fully decentralized 
+                    No central authority controls your funds. PayLink operates as a fully decentralized 
                     application, giving you complete control over your assets.
                   </CardDescription>
                 </CardContent>
@@ -280,7 +280,7 @@ export default function LearnMorePage() {
                 </div>
                 <CardTitle className="text-3xl font-bold mb-4">Earn Rewards</CardTitle>
                 <CardDescription className="text-lg">
-                  Get rewarded for every transaction you make on PayFi
+                  Get rewarded for every transaction you make on PayLink
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -288,7 +288,7 @@ export default function LearnMorePage() {
                   <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-2xl border border-yellow-200">
                     <h4 className="text-2xl font-bold text-yellow-600 mb-2">How Rewards Work</h4>
                     <p className="text-gray-700">
-                      Earn PayFi Reward Coins (PRC) for every successful transaction. The more you use PayFi, 
+                      Earn PayLink Reward Coins (PRC) for every successful transaction. The more you use PayLink, 
                       the more rewards you accumulate. Redeem your rewards for discounts on transaction fees 
                       or convert them back to SHM tokens.
                     </p>
@@ -321,14 +321,14 @@ export default function LearnMorePage() {
           <div className="max-w-2xl mx-auto">
             <h3 className="text-4xl font-bold mb-6">Ready to Get Started?</h3>
             <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of users already enjoying fast, secure, and rewarding payments with PayFi
+              Join thousands of users already enjoying fast, secure, and rewarding payments with PayLink
             </p>
             <Link href="/">
               <Button
                 size="lg"
                 className="text-lg px-10 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-xl shadow-primary/25 transform hover:scale-105 transition-all duration-200"
               >
-                Start Using PayFi
+                Start Using PayLink
                 <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
               </Button>
             </Link>

@@ -61,9 +61,9 @@ export function ReceiveTab() {
   const sharePaymentRequest = async () => {
     if (address) {
       const shareData = {
-        title: "PayFi Payment Request",
-        text: `Send ${amount || "any amount"} SHM to my PayFi wallet`,
-        url: `https://payfi.app/pay?to=${address}&amount=${amount}&note=${encodeURIComponent(note)}`,
+        title: "PayLink Payment Request",
+        text: `Send ${amount || "any amount"} SHM to my PayLink wallet`,
+        url: `https://PayLink.app/pay?to=${address}&amount=${amount}&note=${encodeURIComponent(note)}`,
       }
 
       if (navigator.share) {

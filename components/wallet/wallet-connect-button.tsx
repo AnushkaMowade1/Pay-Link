@@ -19,9 +19,10 @@ interface WalletConnectButtonProps {
   variant?: "default" | "outline" | "ghost"
   size?: "sm" | "default" | "lg"
   className?: string
+  showConnectedText?: boolean // New prop to show "Wallet Connected" instead of address
 }
 
-export function WalletConnectButton({ variant = "default", size = "default", className }: WalletConnectButtonProps) {
+export function WalletConnectButton({ variant = "default", size = "default", className, showConnectedText = false }: WalletConnectButtonProps) {
   const { isConnected, address, balance, isLoading, error, connect, disconnect, isOnShardeumNetwork } = useWallet()
   const [showDialog, setShowDialog] = useState(false)
 
@@ -31,13 +32,13 @@ export function WalletConnectButton({ variant = "default", size = "default", cla
         <DialogTrigger asChild>
           <Button variant={variant} size={size} className={className}>
             <Wallet className="w-4 h-4 mr-2" />
-            {`${address.slice(0, 6)}...${address.slice(-4)}`}
+            {showConnectedText ? "Wallet Connected" : `${address.slice(0, 6)}...${address.slice(-4)}`}
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Wallet Connected</DialogTitle>
-            <DialogDescription>Your MetaMask wallet is connected to PayFi</DialogDescription>
+            <DialogDescription>Your MetaMask wallet is connected to PayLink</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
@@ -78,7 +79,7 @@ export function WalletConnectButton({ variant = "default", size = "default", cla
             {!isOnShardeumNetwork && (
               <Alert>
                 <AlertCircle className="h-4 w-4" />
-                <AlertDescription>Please switch to Shardeum Unstablenet to use PayFi features.</AlertDescription>
+                <AlertDescription>Please switch to Shardeum Unstablenet to use PayLink features.</AlertDescription>
               </Alert>
             )}
 
@@ -122,7 +123,7 @@ export function WalletConnectButton({ variant = "default", size = "default", cla
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Connect Your Wallet</DialogTitle>
-          <DialogDescription>Connect your MetaMask wallet to start using PayFi on Shardeum</DialogDescription>
+          <DialogDescription>Connect your MetaMask wallet to start using PayLink on Shardeum</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
@@ -158,7 +159,7 @@ export function WalletConnectButton({ variant = "default", size = "default", cla
             </ul>
           </div>
 
-          {typeof window !== "undefined" && typeof window.ethereum === "undefined" && (
+          {typeof window !== "undefined" && !(window as any).ethereum && (
             <Alert>
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>

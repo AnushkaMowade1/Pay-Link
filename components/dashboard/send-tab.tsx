@@ -207,7 +207,7 @@ export function SendTab() {
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            You're not connected to Shardeum Unstablenet. Please switch networks in MetaMask to use PayFi features.{" "}
+            You're not connected to Shardeum Unstablenet. Please switch networks in MetaMask to use PayLink features.{" "}
             <a
               href="https://docs.shardeum.org/docs/endpoints"
               target="_blank"

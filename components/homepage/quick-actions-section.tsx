@@ -116,7 +116,7 @@ export function QuickActionsSection() {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Scan QR Code</DialogTitle>
-                <DialogDescription>Point your camera at a PayFi QR code to make a payment</DialogDescription>
+                <DialogDescription>Point your camera at a PayLink QR code to make a payment</DialogDescription>
               </DialogHeader>
               <div className="space-y-4">
                 <div className="flex justify-center p-8 bg-muted rounded-lg">

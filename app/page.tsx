@@ -111,6 +111,7 @@ export default function HomePage() {
               <WalletConnectButton
                 size="lg"
                 className="text-lg px-10 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-xl shadow-primary/25 transform hover:scale-105 transition-all duration-200"
+                showConnectedText={true}
               />
               <Link href="/learn-more">
                 <Button
