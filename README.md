@@ -193,14 +193,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [MetaMask](https://metamask.io/) for Web3 wallet integration
 - [Shardeum](https://shardeum.org/) for the blockchain infrastructure
 
-## 📞 Support
-
-For support, email your-email@example.com or join our Discord community.
-
-## 🌐 Live Demo
-
-Visit the live application: [PayLink Demo](http://localhost:3000) (when running locally)
-
 ---
 
 **Made with ❤️ by the PayLink Team**
