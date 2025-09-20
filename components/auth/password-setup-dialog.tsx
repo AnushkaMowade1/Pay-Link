@@ -16,16 +16,29 @@ import { Eye, EyeOff, Lock } from "lucide-react"
 import { usePassword } from "@/hooks/use-password"
 
 interface PasswordSetupDialogProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   onSuccess?: () => void
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  onPasswordSet?: () => void
 }
 
-export function PasswordSetupDialog({ children, onSuccess }: PasswordSetupDialogProps) {
+export function PasswordSetupDialog({ 
+  children, 
+  onSuccess, 
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+  onPasswordSet
+}: PasswordSetupDialogProps) {
   const { setPassword } = usePassword()
-  const [open, setOpen] = useState(false)
+  const [internalOpen, setInternalOpen] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
+  // Use controlled or internal state
+  const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen
+  const setIsOpen = controlledOnOpenChange || setInternalOpen
   const [form, setForm] = useState({
     password: "",
     confirmPassword: "",
@@ -48,9 +61,10 @@ export function PasswordSetupDialog({ children, onSuccess }: PasswordSetupDialog
     
     try {
       await setPassword(form.password)
-      setOpen(false)
+      setIsOpen(false)
       setForm({ password: "", confirmPassword: "" })
       onSuccess?.()
+      onPasswordSet?.()
     } catch (error) {
       alert("Failed to set password. Please try again.")
     } finally {
@@ -59,10 +73,12 @@ export function PasswordSetupDialog({ children, onSuccess }: PasswordSetupDialog
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {children && (
+        <DialogTrigger asChild>
+          {children}
+        </DialogTrigger>
+      )}
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -144,7 +160,7 @@ export function PasswordSetupDialog({ children, onSuccess }: PasswordSetupDialog
             <Button
               type="button"
               variant="outline"
-              onClick={() => setOpen(false)}
+              onClick={() => setIsOpen(false)}
               className="flex-1"
             >
               Cancel

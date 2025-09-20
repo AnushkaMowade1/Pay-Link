@@ -16,24 +16,34 @@ import { Eye, EyeOff, Lock, AlertCircle } from "lucide-react"
 import { usePassword } from "@/hooks/use-password"
 
 interface PasswordVerifyDialogProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   onSuccess?: () => void
+  onVerified?: () => void
   title?: string
   description?: string
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 export function PasswordVerifyDialog({ 
   children, 
   onSuccess, 
+  onVerified,
   title = "Verify Password",
-  description = "Enter your password to authorize this transaction"
+  description = "Enter your password to authorize this transaction",
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange
 }: PasswordVerifyDialogProps) {
   const { verifyPassword } = usePassword()
-  const [open, setOpen] = useState(false)
+  const [internalOpen, setInternalOpen] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+
+  // Use controlled or internal state
+  const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen
+  const setIsOpen = controlledOnOpenChange || setInternalOpen
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,9 +54,10 @@ export function PasswordVerifyDialog({
       const isValid = await verifyPassword(password)
       
       if (isValid) {
-        setOpen(false)
+        setIsOpen(false)
         setPassword("")
         onSuccess?.()
+        onVerified?.()
       } else {
         setError("Incorrect password. Please try again.")
       }
@@ -58,7 +69,7 @@ export function PasswordVerifyDialog({
   }
 
   const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen)
+    setIsOpen(newOpen)
     if (!newOpen) {
       setPassword("")
       setError("")
@@ -66,10 +77,12 @@ export function PasswordVerifyDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      {children && (
+        <DialogTrigger asChild>
+          {children}
+        </DialogTrigger>
+      )}
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
