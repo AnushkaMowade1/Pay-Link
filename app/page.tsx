@@ -1,11 +1,18 @@
-import { Send, History, QrCode, Zap, Shield, DollarSign, CreditCard, Receipt, ArrowRight, Sparkles } from "lucide-react"
+"use client"
+
+import { Send, History, QrCode, Zap, Shield, DollarSign, CreditCard, Receipt, ArrowRight, Sparkles, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { WalletConnectButton } from "@/components/wallet/wallet-connect-button"
-import { QuickActionsSection } from "@/components/homepage/quick-actions-section"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function HomePage() {
+  const router = useRouter()
+
+  const handleQuickAction = (action: string) => {
+    router.push("/dashboard")
+  }
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -26,7 +33,45 @@ export default function HomePage() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <WalletConnectButton variant="ghost" size="sm" />
+              {/* Quick Actions */}
+              <div className="hidden md:flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                  onClick={() => handleQuickAction('send')}
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Send</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                  onClick={() => handleQuickAction('split')}
+                >
+                  <Users className="w-4 h-4" />
+                  <span>Split</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                  onClick={() => handleQuickAction('qr')}
+                >
+                  <QrCode className="w-4 h-4" />
+                  <span>QR</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                  onClick={() => handleQuickAction('history')}
+                >
+                  <History className="w-4 h-4" />
+                  <span>History</span>
+                </Button>
+              </div>
               <WalletConnectButton
                 size="sm"
                 className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg shadow-primary/25"
@@ -82,8 +127,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quick Actions Section */}
-      <QuickActionsSection />
+
 
       {/* Features Grid */}
       <section className="py-20 px-4 bg-gradient-to-b from-muted/30 to-muted/10">
@@ -174,27 +218,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/5 to-primary/10"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_var(--tw-gradient-stops))] from-secondary/20 via-transparent to-transparent"></div>
 
-        <div className="container mx-auto text-center relative">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
-              Ready to Experience Fast, Cheap Payments?
-            </h3>
-            <p className="text-muted-foreground text-xl mb-12 leading-relaxed">
-              Join the PayLink revolution and start sending money at lightning speed with minimal fees.
-            </p>
-            <WalletConnectButton
-              size="lg"
-              className="text-xl px-12 py-5 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-2xl shadow-primary/30 transform hover:scale-105 transition-all duration-300"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="border-t py-12 px-4 bg-gradient-to-b from-muted/30 to-muted/50">
@@ -207,7 +231,7 @@ export default function HomePage() {
               PayLink
             </span>
           </div>
-          <p className="text-muted-foreground">Built for Shardeum Hackathon • Powered by Shardeum Blockchain</p>
+          <p className="text-muted-foreground">Powered by Shardeum Blockchain</p>
         </div>
       </footer>
     </div>
